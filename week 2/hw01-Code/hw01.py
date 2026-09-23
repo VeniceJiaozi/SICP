@@ -16,9 +16,9 @@ def a_add_abs_b(a, b):
     ['return h(a, b)']
     """
     if b >= 0:
-        h = _____
+        h = add
     else:
-        h = _____
+        h = sub
     return h(a, b)
 
 def two_of_three(x, y, z):
@@ -36,7 +36,7 @@ def two_of_three(x, y, z):
     >>> check_single_return(two_of_three)
     >>> check_no_square_brackets(two_of_three)
     """
-    return _____
+    return x*x+y*y+z*z-min(x,y,z)**2
 
 def largest_factor(x):
     """Return the largest factor of x that is smaller than x.
@@ -49,6 +49,9 @@ def largest_factor(x):
     1
     """
     "*** YOUR CODE HERE ***"
+    for i in range(x-1,0,-1):
+        if x%i==0:
+            return i
 
 def if_function(condition, true_result, false_result):
     """Return true_result if condition is a true value, and
@@ -93,12 +96,15 @@ def with_if_function():
 
 def c():
     "*** YOUR CODE HERE ***"
+    return False
 
 def t():
     "*** YOUR CODE HERE ***"
+    print(1)
 
 def f():
     "*** YOUR CODE HERE ***"
+    print(2)
 
 def hailstone(x):
     """Print the hailstone sequence starting at x and return its
@@ -116,6 +122,16 @@ def hailstone(x):
     7
     """
     "*** YOUR CODE HERE ***"
+    ans=0
+    while x!=1:
+        print(x)
+        if x%2==0:
+            x//=2
+        else:
+            x=x*3+1
+        ans+=1
+    print(1)
+    return ans+1
 
 def double_factorial(n):
     """Compute the double factorial of n.
@@ -130,6 +146,12 @@ def double_factorial(n):
     1
     """
     "*** YOUR CODE HERE ***"
+    ans=n
+    while True:
+        if(n==2 or n==1):
+            return ans
+        n-=2
+        ans*=n
 
 def double_ones(n):
     """Return true if n has two ones in a row.
@@ -148,6 +170,9 @@ def double_ones(n):
     False
     """
     "*** YOUR CODE HERE ***"
+    s=str(n)
+    length=len(s)
+    return '11' in s
 
 def remove_even_position(n):
     """Removes the digits of n in even positions (the 2nd, 4th, 6th, … from left to right),
@@ -163,6 +188,27 @@ def remove_even_position(n):
     135
     """
     "*** YOUR CODE HERE ***"
+
+    num_digits=0
+    temp=n
+    while temp>0:
+        temp//=10
+        num_digits+=1
+    flag=(num_digits%2==0) #若为偶数位，保留1、3、5...位
+    ans=0
+    digits=0 #记录答案当前位数
+    while n>0:
+        if(flag):
+            n//=10
+            cur=n%10
+            n//=10
+        else:
+            cur=n%10
+            n//=100
+        ans+=cur*(10**digits)
+        digits+=1
+    return ans
+
 
 def second_largest(x, y, z):
     """Return the second largest value in `x`, `y`, and `z`.
@@ -188,3 +234,20 @@ def second_largest(x, y, z):
     >>> check_no_square_brackets(second_largest)
     """
     "*** YOUR CODE HERE ***"
+    if x>=y:
+        if y>=z:
+            return y
+        else:
+            if z>=x:
+                return x
+            else:
+                return z
+    else:
+        if x>=z:
+            return x
+        else:
+            if z>=y:
+                return y
+            else:
+                return z
+    
